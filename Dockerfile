@@ -1,9 +1,9 @@
-# Stage 1: Build JioTV Go
+# Stage 1: Build
 FROM golang:1.26-alpine AS builder
 
 RUN apk add --no-cache git ca-certificates
 
-WORKDIR /app
+WORKDIR /src
 
 RUN git clone --depth 1 https://github.com/JioTV-Go/jiotv_go.git .
 
@@ -25,6 +25,6 @@ ENV TZ=Asia/Kolkata
 ENV JIOTV_DRM=true
 ENV JIOTV_PATH_PREFIX=/app/.jiotv_go
 
-EXPOSE 8080
+EXPOSE 9000
 
-CMD ["/app/jiotv_go", "serve", "--public", "--port", "8080"]
+CMD ["/app/jiotv_go", "serve", "--host", "0.0.0.0", "--port", "9000"]
