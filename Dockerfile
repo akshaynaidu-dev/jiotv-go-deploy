@@ -22,7 +22,9 @@ WORKDIR /app
 COPY --from=builder /jiotv_go /app/jiotv_go
 
 ENV TZ=Asia/Kolkata
+ENV JIOTV_DRM=true
+ENV JIOTV_PATH_PREFIX=/app/.jiotv_go
 
 EXPOSE 8080
 
-CMD ["/app/jiotv_go"]
+CMD ["/app/jiotv_go", "serve", "--public", "--port", "8080"]
